@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.container {
+    text-align: center;
+}
+
+a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+}
+
+#chat-box {
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#chat-form {
+    display: flex;
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message p {
+    margin: 0;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    flex-grow: 1;
+}
+
+.user p {
+    background-color: #d1e7fd;
+    color: #333;
+}
+
+.bot p {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+#record-toggle {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+#record-toggle.recording {
+    background-color: #dc3545;
+}
+
+#record-toggle:hover {
+    background-color: #0056b3;
+}
+
+.speech-message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.speech-message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.speech-message p {
+    margin: 0;
+    padding: 10px;
+    background-color: #eef;
+    border-radius: 10px;
+    flex-grow: 1;
+}
+
+.speech-user p {
+    background-color: #d1e7fd;
+}
+
+.speech-bot p {
+    background-color: #f1f1f1;
+}
+
+.speech-chat-container {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.speech-chat-box {
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speech Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Speech Chat Interface</h2>
+        <div id="chat-box">
+            <!-- Speech-to-text messages will appear here -->
+        </div>
+        <button id="record-toggle">Start Recording</button>
+    </div>
+
+    <script>
+        var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.continuous = false;
+
+        var isRecording = false;
+        let mediaRecorder;
+        let audioChunks = [];
+
+        function startRecording(stream) {
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+            mediaRecorder.ondataavailable = function(event) {
+                audioChunks.push(event.data);
+            };
+            mediaRecorder.onstop = sendAudioToServer;
+            mediaRecorder.start();
+        }
+
+        function sendAudioToServer() {
+            const audioBlob = new Blob(audioChunks, { 'type' : 'audio/wav' });
+            const formData = new FormData();
+            formData.append('audio', audioBlob);
+
+            fetch('/process_audio', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                var chatBox = document.getElementById('chat-box');
+                
+                // Play the audio and then display the bot's response
+                var audioUrl = URL.createObjectURL(blob);
+                var audio = new Audio(audioUrl);
+                audio.play();
+                audio.onended = function() {
+                    // Fetch the transcribed message and bot's reply
+                    fetch('/get_last_messages')
+                    .then(response => response.json())
+                    .then(data => {
+                        chatBox.innerHTML += '<div class="message user"><img src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png" alt="User"><p>' + data.user_message.replace(/\n/g, '<br>') + '</p></div>';
+                        chatBox.innerHTML += '<div class="message bot"><img src="https://uploads-ssl.webflow.com/64e02bd14ada8a57fa327cbe/64e445ced8cf185ffb9bb1b9_Rex%20Small_.png" alt="Bot"><p>' + data.bot_reply.replace(/\n/g, '<br>') + '</p></div>';
+                        scrollToBottom(); // Auto-scroll after adding new messages
+                    });
+                };
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function scrollToBottom() {
+            var chatBox = document.getElementById("chat-box");
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function toggleRecording() {
+            var recordButton = document.getElementById('record-toggle');
+            if (isRecording) {
+                if(mediaRecorder) {
+                    mediaRecorder.stop();
+                }
+                recordButton.textContent = 'Start Recording';
+                recordButton.classList.remove('recording');
+            } else {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(startRecording)
+                    .catch(error => console.error('Error accessing media devices:', error));
+                recordButton.textContent = 'Stop Recording';
+                recordButton.classList.add('recording');
+            }
+            isRecording = !isRecording;
+        }
+
+        document.getElementById('record-toggle').onclick = function() {
+            toggleRecording();
+        };
+    </script>
+</body>
+</html>

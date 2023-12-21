@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Text Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="chat-container">
+      <div id="chat-box">
+        <!-- Chat messages will appear here -->
+      </div>
+      <form id="chat-form">
+        <textarea id="chat-input" placeholder="Type your message..." required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+    <script>
+      function scrollToBottom() {
+        var chatBox = document.getElementById("chat-box");
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      document.getElementById('chat-form').onsubmit = async function(event) {
+        event.preventDefault();
+        var input = document.getElementById('chat-input');
+        var text = input.value;
+        input.value = '';
+        // Display the user's message with line breaks
+        var chatBox = document.getElementById('chat-box');
+        chatBox.innerHTML += '<div class="message user"><img src="https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png" alt="User"><p>' + text.replace(/\n/g, '<br>') + '</p></div>';
+        scrollToBottom();
+
+        // Send 'text' to the server and get the response
+        try {
+            const response = await fetch('/send_message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: text }),
+            });
+            const data = await response.json();
+            // Display the bot's response with proper formatting
+            chatBox.innerHTML += '<div class="message bot"><img src="https://uploads-ssl.webflow.com/64e02bd14ada8a57fa327cbe/64e445ced8cf185ffb9bb1b9_Rex%20Small_.png" alt="Bot"><p>' + data.reply.replace(/\n/g, '<br>') + '</p></div>';
+            scrollToBottom();
+        } catch (error) {
+            console.error('Error:', error);
+        }
+      };
+
+      // Enable Shift+Enter for line breaks and Enter to submit
+      document.getElementById('chat-input').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          document.getElementById('chat-form').dispatchEvent(new Event('submit'));
+        }
+      });
+    </script>
+  </body>
+</html>
