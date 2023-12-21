@@ -50,4 +50,4 @@ Explain how to use the application:
 
 ## License
 
-Specify the license under which your project is released.
+MIT License
