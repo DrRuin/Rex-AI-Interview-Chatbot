@@ -1,0 +1,5 @@
+OpenAI
+flask
+langchain
+sounddevice
+soundfile
