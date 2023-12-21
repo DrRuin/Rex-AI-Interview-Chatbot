@@ -35,9 +35,7 @@ Explain how to use the application:
 - **TTS-1**: OpenAI's latest Text-To-Speech model.
 - **GPT-3.5-Turbo**: OpenAI's GPT-3.5-Turbo model for fast answering.
 
-## Screenshots
-
-Include some screenshots of your application in action. This helps users get a feel for the UI.
+## Screenshots Demo
 
 ![Front Page](https://i.imgur.com/srSLalf.png)
 ![Text Chat Interface](https://i.imgur.com/0oF5eir.png)
