@@ -38,8 +38,10 @@ Explain how to use the application:
 
 ## Demonstration
 
-[Rex AI Interview Prep Presentation](https://www.youtube.com/watch?v=ra9E84YI1l4)  
-[Rex AI Interview Prep Walkthrough](https://www.youtube.com/watch?v=t6ZPUlb_a2Y)  
+[Rex AI Interview Prep Presentation](https://www.youtube.com/watch?v=ra9E84YI1l4)
+
+[Rex AI Interview Prep Walkthrough](https://www.youtube.com/watch?v=t6ZPUlb_a2Y)
+
 
 
 ## Screenshots
