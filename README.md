@@ -35,7 +35,14 @@ Explain how to use the application:
 - **TTS-1**: OpenAI's latest Text-To-Speech model.
 - **GPT-3.5-Turbo**: OpenAI's GPT-3.5-Turbo model for fast answering.
 
-## Screenshots Demo
+
+## Demonstration
+
+[Rex AI Interview Prep Presentation](https://www.youtube.com/watch?v=ra9E84YI1l4)  
+[Rex AI Interview Prep Walkthrough](https://www.youtube.com/watch?v=t6ZPUlb_a2Y)  
+
+
+## Screenshots
 
 ![Front Page](https://i.imgur.com/srSLalf.png)
 ![Text Chat Interface](https://i.imgur.com/0oF5eir.png)
@@ -43,6 +50,7 @@ Explain how to use the application:
 
 **And not just Interview Simulation, it also works for general Data Science questions to improve user's understanding**
 ![General Questioning](https://i.imgur.com/Rkosl69.png)
+
 
 ## Contribution
 
